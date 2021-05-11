@@ -1,0 +1,34 @@
+.twoblocks {
+    $root: &;
+
+    &__container {
+        margin-top: 40px;
+        display: flex;
+        &_block {
+            padding: 20px;
+            width: 50%;
+
+            &--red{
+                background-color: $red;
+            }
+            &--yellow{
+                background-color: $yellow;
+            }
+            &--green{
+                background-color: $green;
+            }
+
+            &--none {
+                display: none;
+            }
+        }
+    }
+    &__footer {
+        margin-top: 40px;
+        display: flex;
+        justify-content: center;
+        &_button {
+           
+        }
+    }
+}
