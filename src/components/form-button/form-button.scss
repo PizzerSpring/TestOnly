@@ -1,0 +1,11 @@
+.form-button {
+    $root: &;
+    font-size: 16px;
+    padding: 10px;
+    background-color: #32CD32;
+
+    &--disabled {
+        opacity: 0.5;
+    }
+
+}

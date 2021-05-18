@@ -13,6 +13,7 @@ import Header from '../../components/header/header';
 import Footer from '../../components/footer/footer';
 import Modal from '../../components/modal/modal';
 import Twoblocks from '../../components/twoblocks/twoblocks';
+import Form from '../../components/form/form';
 
 fromEvent(document, 'DOMContentLoaded').subscribe(() => {
   new Header(getComponent('header'));
@@ -23,6 +24,10 @@ fromEvent(document, 'DOMContentLoaded').subscribe(() => {
 
   if(getComponent('twoblocks').component) {
     getComponents('twoblocks').forEach(component => new Twoblocks(component));
+  }
+
+  if(getComponent('form').component) {
+    getComponents('form').forEach(component => new Form(component));
   }
 
   const images = document.querySelectorAll('img');
