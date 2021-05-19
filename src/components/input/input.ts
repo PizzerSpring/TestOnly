@@ -4,7 +4,7 @@ import Component, { ComponentProps } from '../../app/js/component';
 import FormButton from '../form-button/form-button';
 
 export default class Input extends Component.Default {
-    FormButton: FormButton;
+    sFormButton: FormButton;
     input: HTMLInputElement;
     name: string;
     value: string;
@@ -16,7 +16,7 @@ export default class Input extends Component.Default {
 
     constructor(element: ComponentProps, onChange: () => void) {
         super(element);
-        this.FormButton = new FormButton(getComponent('form-button', this.nRoot));
+        this.sFormButton = new FormButton(getComponent('form-button', this.nRoot));
 
         this.input = this.nRoot.querySelector('input');
         this.name = this.input.name;
@@ -25,20 +25,23 @@ export default class Input extends Component.Default {
         this.type = this.input.type;
         this.error = this.getElement('error');
 
-        this.regex = /\d/;
+        this.regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
         this.onChange = onChange;
 
         fromEvent(this.input, 'input').subscribe(this.onChangeInput);
 
-        //let regex = /\d/;
+       // let regex = /\d/;
 
-       /* switch(this.type) {
+       console.log(this.type);
+
+        switch(this.type) {
             case 'email':
-                this.regex = /\d/;
+                this.regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                break;
             default: 
-                this.regex = /\d/;
-        }*/
+                this.regex = /\s/;
+        }
     }
 
     getValue = () => this.input.value;
@@ -55,9 +58,9 @@ export default class Input extends Component.Default {
        if(this.regex.test(this.getValue())) {
            this.setError('Ошибка!');
           // console.log(this.setError('Ошибка!'));
-          this.FormButton.setDisabled(this.regex.test(this.getValue()));
+          this.sFormButton.setDisabled(this.regex.test(this.getValue()));
           
-       }
+       } 
         if ((<HTMLInputElement>e.target)?.value?.length) {
             this.nRoot.classList.add('fill');
         } else {
@@ -69,6 +72,7 @@ export default class Input extends Component.Default {
         this.error.innerHTML = content;
 
     }
+
 
     destroy = () => {
         // Destroy functions
