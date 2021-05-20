@@ -17,12 +17,13 @@ export default class Form extends Component.Default {
 
     upDateButton = () => {
         const state = this.nInputs.every(item => {
-            if(item.valid) return item.getValue();
+            if(item.valid) return item.valid;
             return true;
         });
 
+        //if(item.required) return item.getValue();
 
-        
+
         this.nFormButton.setDisabled(!state);
         console.log(this.nInputs);
         

@@ -29,7 +29,7 @@ export default class Input extends Component.Default {
 
         this.regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-        this.valid;
+        this.valid = true;
         this.onChange = onChange;
 
         fromEvent(this.input, 'input').subscribe(this.onChangeInput);
@@ -49,6 +49,7 @@ export default class Input extends Component.Default {
     getValue = () => this.input.value;
 
     onChangeInput = (e: Event) => {
+        
        if(this.required) this.onChange();
 
        //console.log(this.regex);
@@ -60,12 +61,19 @@ export default class Input extends Component.Default {
        if(this.regex.test(this.getValue())) {
            
         this.valid = this.regex.test(this.getValue());
-        this.setError('Ошибка!');
+        this.setError('');
+        this.onChange();
 
        } else {
-        
-
+           this.valid = false;
+           this.setError('Error');
+           
        }
+       this.valid = false;
+       
+       //if(this.valid) this.onChange();
+       
+     
            
 
            
