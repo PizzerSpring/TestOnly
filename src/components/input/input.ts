@@ -1,7 +1,5 @@
-import { getComponent } from './../../app/js/component';
 import { fromEvent } from 'rxjs';
 import Component, { ComponentProps } from '../../app/js/component';
-import FormButton from '../form-button/form-button';
 
 export default class Input extends Component.Default {
     input: HTMLInputElement;
@@ -11,7 +9,7 @@ export default class Input extends Component.Default {
     required: boolean;
     error: HTMLElement;
     regex: RegExp;
-    valid: boolean;
+    valid: boolean = false;
     onChange: () => void;
 
     constructor(element: ComponentProps, onChange: () => void) {
@@ -21,20 +19,11 @@ export default class Input extends Component.Default {
         this.input = this.nRoot.querySelector('input');
         this.name = this.input.name;
         this.value = this.input.value;
-        this.required = this.input.hasAttribute('data-required');
         this.type = this.input.type;
+        this.required = this.input.hasAttribute('data-required');
+        
         this.error = this.getElement('error');
 
-        
-
-        this.regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-        this.valid = true;
-        this.onChange = onChange;
-
-        fromEvent(this.input, 'input').subscribe(this.onChangeInput);
-
-       // let regex = /\d/;
 
 
         switch(this.type) {
@@ -42,59 +31,36 @@ export default class Input extends Component.Default {
                 this.regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
                 break;
             default: 
-                this.regex = /\s/;
+                this.regex = null;
+                break;
         }
-    }
 
-    getValue = () => this.input.value;
+        this.onChange = onChange;
+        fromEvent(this.input, 'input').subscribe(this.onChangeInput);
+    }
 
     onChangeInput = (e: Event) => {
+        this.value = (<HTMLInputElement>e.target).value;
         
-       if(this.required) this.onChange();
 
-       //console.log(this.regex);
-      // console.log(this.valid);
-       
-
-       //console.log(this.regex.test(this.value));
-
-       if(this.regex.test(this.getValue())) {
-           
-        this.valid = this.regex.test(this.getValue());
-        this.setError('');
-        this.onChange();
-
-       } else {
-           this.valid = false;
-           this.setError('Error');
-           
+       switch(this.type) {
+            case 'email':
+               const valid = this.regex.test(this.value);
+               this.valid = valid;
+               this.setError(valid, 'Неверный e-mail');
+               break;
+            default: 
+               this.valid = this.value.length > 0;
+               break;   
        }
-       this.valid = false;
-       
-       //if(this.valid) this.onChange();
-       
-     
-           
-
-           
-           //console.log(this.valid);
-           //console.log(this.regex.test(this.getValue()));
-           
-          // console.log(this.setError('Ошибка!'));
           
-          
-       
-        if ((<HTMLInputElement>e.target)?.value?.length) {
-            this.nRoot.classList.add('fill');
-        } else {
-            this.nRoot.classList.remove('fill');
-        }
-    }
+        this.value.length ? this.nRoot.classList.add('fill') : this.nRoot.classList.remove('fill');
+        if(this.required) this.onChange();
+    };
 
-    setError = (content: string) => {
-        this.error.innerHTML = content;
-
-    }
+    setError = (error: boolean, content: string) => {
+        !error ? this.error.innerHTML = content : this.error.innerHTML = '';
+    };
 
 
     destroy = () => {

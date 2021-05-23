@@ -17,21 +17,15 @@ export default class Form extends Component.Default {
 
     upDateButton = () => {
         const state = this.nInputs.every(item => {
-            if(item.valid) return item.valid;
+            if(item.required) return item.valid;
             return true;
         });
 
-        //if(item.required) return item.getValue();
-
+        //console.log(state);
 
         this.nFormButton.setDisabled(!state);
-        console.log(this.nInputs);
         
-       // console.log(this.nInputs.every(item => item.valid === true));
         
-       
-       
-
     }
 
     onSubmit = (e: Event) => {
@@ -41,7 +35,7 @@ export default class Form extends Component.Default {
 
 
         this.nInputs.forEach(item => {
-            data[item.name] = item.getValue();
+            data[item.name] = item.valid;
         });
 
         console.log(data);

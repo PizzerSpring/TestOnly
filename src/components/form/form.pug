@@ -1,7 +1,7 @@
 mixin form(props)
     form.form&attributes(attributes)
         +input({name: 'surname', label: 'Фамилия', required: true}).form__input
-        +input({name: 'name', label: 'Имя', required: false}).form__input
+        +input({name: 'name', label: 'Имя'}).form__input
         +input({name: 'patronymic', label: 'Отчество'}).form__input
         +input({name: 'phone', label: 'Телефон'}).form__input
         +input({name: 'e-mail', label: 'E-mail', type: 'email'}).form__input

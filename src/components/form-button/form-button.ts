@@ -8,9 +8,11 @@ export default class FormButton extends Component.Default {
     setDisabled = (disabled: boolean) => {
         const disabledClass = `${this.nRootName}--disabled`;
         if(disabled) {
+            if(this.nRoot.classList.contains(disabledClass)) return;
             this.nRoot.classList.add(disabledClass);
             this.nRoot.setAttribute('disabled', 'disabled');
         } else {
+            if(!this.nRoot.classList.contains(disabledClass)) return;
             this.nRoot.classList.remove(disabledClass);
             this.nRoot.removeAttribute('disabled');
         }
