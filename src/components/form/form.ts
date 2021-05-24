@@ -21,7 +21,6 @@ export default class Form extends Component.Default {
             return true;
         });
 
-        //console.log(state);
 
         this.nFormButton.setDisabled(!state);
         
@@ -35,7 +34,7 @@ export default class Form extends Component.Default {
 
 
         this.nInputs.forEach(item => {
-            data[item.name] = item.valid;
+            data[item.name] = item.value;
         });
 
         console.log(data);
