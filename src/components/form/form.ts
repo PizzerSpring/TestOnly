@@ -21,11 +21,9 @@ export default class Form extends Component.Default {
         this.nRoot.addEventListener('submit', this.onSubmit);
         
 
-        axios.get('http://dev.studio-mind.ru/api/form')
+        axios.get('http://dev.studio-mind.ru/api/form?nameId=1621872403724_vladislav2')
         .then(result => {
-            for(let i = 0; i < result.data.list.length; i++) {
-                console.log(result.data.list[i].nameId);
-            }
+            console.log(result.data.list[0]);
         })
         .catch(error => console.log(error));
 
