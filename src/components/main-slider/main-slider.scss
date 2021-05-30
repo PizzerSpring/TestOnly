@@ -1,0 +1,39 @@
+.main-slider {
+    $root: &;
+    display: flex;
+
+    &__container, &__container-clone, &__container-clonethree {
+        width: 30%;
+      
+    }
+
+    &__slide{
+        padding: 200px 80px;
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        &-content {
+            display: flex;
+            flex-direction: column;
+            width: 20%;
+            margin-bottom: 20px;
+
+            h2 {
+                font-size: 40px;
+                font-weight: 700;
+            }
+
+            p {
+                font-size: 18px;
+                line-height: 26px;
+            }
+        }
+    }
+}

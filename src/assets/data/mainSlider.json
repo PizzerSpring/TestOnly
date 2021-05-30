@@ -1,0 +1,17 @@
+[
+    {
+        "title": "Слайдер 1",
+        "description": "Описание слайда",
+        "image": "../../assets/images/1.jpg"
+    },
+    {
+        "title": "Слайдер 2",
+        "description": "Описание слайда",
+        "image": "../../assets/images/2.jpg"
+    },
+    {
+        "title": "Слайдер 3",
+        "description": "Описание слайда",
+        "image": "../../assets/images/3.jpg"
+    }
+]

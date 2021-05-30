@@ -1,0 +1,34 @@
+mixin main-slider(props)
+    .main-slider&attributes(attributes)
+        .swiper-container.main-slider__container
+            .swiper-wrapper.main-slider__container-wrapper
+                each slide in dataJson.mainSlider
+                    .swiper-slide.main-slider__slide
+                        +img({src: slide.image})
+                        .main-slider__slide-content
+                            h2= slide.title
+                            p= slide.description
+
+        .swiper-container.main-slider__container-clone
+            .swiper-wrapper.main-slider__container-wrapper 
+                each slide, index in dataJson.mainSlider
+                    - let i = (index + 1) % dataJson.mainSlider.length
+                    - let currentSlide = dataJson.mainSlider[i];
+                    .swiper-slide.main-slider__slide
+                        +img({src: currentSlide.image})
+                        .main-slider__slide-content
+                            h2= currentSlide.title
+                            p= currentSlide.description
+
+        .swiper-container.main-slider__container-clonethree
+            .swiper-wrapper.main-slider__container-wrapper 
+                each slide, index in dataJson.mainSlider
+                    - let i = (index + 2) % dataJson.mainSlider.length
+                    - let currentSlide = dataJson.mainSlider[i];
+                    .swiper-slide.main-slider__slide
+                        +img({src: currentSlide.image})
+                        .main-slider__slide-content
+                            h2= currentSlide.title
+                            p= currentSlide.description                                        
+                        
+                           

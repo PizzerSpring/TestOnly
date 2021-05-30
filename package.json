@@ -68,6 +68,6 @@
     "object-fit-images": "^3.2.4",
     "rxjs": "^6.6.3",
     "smooth-scrollbar": "^8.5.3",
-    "swiper": "^6.4.15"
+    "swiper": "^6.6.2"
   }
 }
