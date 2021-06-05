@@ -32,6 +32,7 @@ export default class MainSlider extends Component.Default {
         this.nSwiperClonethree = new Swiper(this.getElement('container-clonethree'), {
             loop: true,
             slidesPerView: 1,
+            
 
             on: {
                 slideChange: () => {
@@ -47,12 +48,17 @@ export default class MainSlider extends Component.Default {
         this.nSwiperClone.controller.control = this.nSwiper;
         this.nSwiper.controller.control = this.nSwiperClone;
         
-        /*this.nSwiper.controller.control = this.nSwiperClone;
+       /* this.nSwiper.controller.control = this.nSwiperClone;
         this.nSwiperClone.controller.control = this.nSwiper;
         this.nSwiperClone.controller.control = this.nSwiperClonethree;
         this.nSwiperClonethree.controller.control = this.nSwiperClone;
         this.nSwiperClonethree.controller.control = this.nSwiper;
         this.nSwiper.controller.control = this.nSwiperClonethree;*/
+
+        
+        
+        //  return slider;
+        
         
     }
 
