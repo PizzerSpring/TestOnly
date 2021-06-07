@@ -12,13 +12,23 @@ export default class MainSlider extends Component.Default {
     constructor(element: ComponentProps) {
         super(element);
 
+        let arr23 = [this.nSwiperClone, this.nSwiperClonethree];
+
+
+
         this.nSwiper = new Swiper(this.getElement('container'), {
             loop: true,
             slidesPerView: 1,
-            on: {
-                slideChange: () => {
-                   setTimeout(() => { this.nSwiperClonethree.slideTo(this.nSwiper.activeIndex); }, 0);
-                }
+            controller: {
+                control: this.nSwiperClone
+                 
+            }
+        });
+        this.nSwiper = new Swiper(this.getElement('container'), {
+            loop: true,
+            slidesPerView: 1,
+            controller: {
+                control: this.nSwiperClonethree               
             }
             
         });
@@ -26,38 +36,36 @@ export default class MainSlider extends Component.Default {
         this.nSwiperClone = new Swiper(this.getElement('container-clone'), {
             loop: true,
             slidesPerView: 1,
+            controller: {
+                control: this.nSwiper
+            }
+    
+        });
+        this.nSwiperClone = new Swiper(this.getElement('container-clone'), {
+            loop: true,
+            slidesPerView: 1,
+            controller: {
+                control: this.nSwiperClonethree 
+            }
     
         });
 
         this.nSwiperClonethree = new Swiper(this.getElement('container-clonethree'), {
             loop: true,
             slidesPerView: 1,
-            
-
-            on: {
-                slideChange: () => {
-                    setTimeout(() => { this.nSwiper.slideTo(this.nSwiperClonethree.activeIndex); }, 0);
-                    setTimeout(() => { this.nSwiperClone.slideTo(this.nSwiperClonethree.activeIndex); }, 0);
-                }
+           controller: {
+                control: this.nSwiper  
             }
-           
             
         });
+        this.nSwiperClonethree = new Swiper(this.getElement('container-clonethree'), {
+            loop: true,
+            slidesPerView: 1,
+            controller: {
+                control: this.nSwiperClone
+            }
+        });
 
-        
-        this.nSwiperClone.controller.control = this.nSwiper;
-        this.nSwiper.controller.control = this.nSwiperClone;
-        
-       /* this.nSwiper.controller.control = this.nSwiperClone;
-        this.nSwiperClone.controller.control = this.nSwiper;
-        this.nSwiperClone.controller.control = this.nSwiperClonethree;
-        this.nSwiperClonethree.controller.control = this.nSwiperClone;
-        this.nSwiperClonethree.controller.control = this.nSwiper;
-        this.nSwiper.controller.control = this.nSwiperClonethree;*/
-
-        
-        
-        //  return slider;
         
         
     }
